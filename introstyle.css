@@ -1,0 +1,10 @@
+body{
+	background-color: #41b1be;
+},
+
+svg {
+	display: block;
+	margin: auto;
+	border-style: solid;
+	border-width: medium;
+}
