@@ -7,7 +7,7 @@ while(isNaN(userInput)){
 }
 
 
-var coordSize = userInput * 10
+var coordSize = (userInput * 10);
 
 
 function createRandomColor(){ //Creates a random colour from the HTML colour list 
@@ -34,9 +34,9 @@ for (x = 0; x < userInput ; x++){ // Set circle attributes
 
 	var circle = {
 		"id" : x, 
-		"cx" : coordSize/2, //corrdinate is rougly the center of the canvas
-		"cy" : coordSize/2, 
-		"r" : (x + 1) *5,
+		"cx" : (coordSize/2), //corrdinate is rougly the center of the canvas
+		"cy" : (coordSize/2), 
+		"r" :  (x + 1) *5,
 		"cirColor" : checkColor(createRandomColor())
 	}
 
@@ -50,8 +50,8 @@ for (x = 0; x < userInput ; x++){ // Set circle attributes
 circleArray.reverse(); // Must reverse the array so the largest circle is on the "bottom" of the stack
 
 var svgContainer = d3.select("body").append("svg") //create a container for the svg shape
-										.attr("width", coordSize)
-										.attr("height", coordSize);
+											.attr("width", coordSize)
+											.attr("height", coordSize);
 										//.style("border", "1px solid black")
 
 	var circles = svgContainer.selectAll("circle") //Creates "nodes" for the circles based on how many indices are in the circle array
