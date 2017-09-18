@@ -13,11 +13,13 @@
 <body>
 	<header> d3js circle stack</header>
 	<script type ="text/javascript" src="circleMove.js"></script> <!-- This file creates a JSON array through a loop -->
-	<form>
-		Number of circles <input type="text" id="numCirc">
+	<form id="form">
+		Number of circles <input type="text" id="numCirc" value="">
 		Size of circles <input type="text" id="sizeCirc">
 	</form>		
+
 	<button onclick="submit()"> Submit </button>
+	<button onclick="reset()"> Reset </button>
 
 	<script type ="text/javascript">
 		

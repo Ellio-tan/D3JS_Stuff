@@ -2,18 +2,25 @@ function submit(){
 
 	var circleArray =[]; 
 
-	var userInput = document.getElementById("numCirc").value; 
-	console.log(userInput);
+	var userInput = Number(document.getElementById("numCirc").value); 
+	//console.log(userInput);
 
-	var userRadius = document.getElementById("sizeCirc").value;//Use after figuring out how big circles you want there to be
+	var userRadius = Number(document.getElementById("sizeCirc").value);//Use after figuring out how big circles you want there to be
 
 	while(isNaN(userInput)){
 		userInput = prompt("please enter a number");
 	}
 
 
-	var coordSize = (userInput * 10); //10 abritraily chosen, fine now because the circles will never go outside the box 
+	
+	var circleCirc = Number(userRadius);
+	var coordSize = (circleCirc*10); //10 abritraily chosen, fine now because the circles will never go outside the box 
 
+	function createCoord(){
+		var cd = ((Math.random()*(coordSize-circleCirc))+ circleCirc);
+		return cd; 
+
+}
 
 	function createRandomColor(){ //Creates a random colour from the HTML colour list 
 		var letters = '0123456789ABCDEF'
@@ -43,9 +50,9 @@ function submit(){
 
 		var circle = {
 			"id" : x, 
-			"cx" : 20+ ((Math.floor(Math.random()*coordSize))), //coordinate is rougly the center of the canvas
-			"cy" : 20+ ((Math.floor(Math.random()*coordSize))), 
-			"r" :  10,
+			"cx" :  createCoord(), //coordinate is rougly the center of the canvas
+			"cy" : createCoord(), 
+			"r" :  userRadius,
 			"cirColor" : checkColor(createRandomColor())
 		}
 
@@ -58,12 +65,12 @@ function submit(){
 	}
 	circleArray.reverse(); // Must reverse the array so the largest circle is on the "bottom" of the stack
 
-	var circleCirc = JSON.stringify(circleArray[0].r);
-	console.log(circleCirc);
+	
+	//console.log(typeof(circleCirc) + " is the type of circleCird");
 
 	var svgContainer = d3.select("body").append("svg") //create a container for the svg shape
-										.attr("width", coordSize+((calculateCirc(JSON.stringify(circleArray[0].r)))))
-										.attr("height", coordSize+((calculateCirc(JSON.stringify(circleArray[0].r)))))
+										.attr("width", coordSize+ circleCirc)
+										.attr("height", coordSize+ circleCirc)
 										.style("border", "1px solid black");
 
 	var circles = svgContainer.selectAll("circle") //Creates "nodes" for the circles based on how many indices are in the circle array
@@ -76,4 +83,9 @@ function submit(){
 							.attr("cy", function (d) {return d.cy; })
 							.attr("r", function (d) {return d.r; })
 							.style("fill", function (d) {return d.cirColor; });
+}
+
+function reset(){
+	document.getElementById("form").reset();
+	d3.select("svg").remove(); 
 }
